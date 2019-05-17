@@ -1,2 +1,5 @@
 # Palabos-UserGuide
-Copy the User's Guide in palabos.org to here to generate PDF conveniently.
+Copy the User's Guide in [palabos.org](http://www.palabos.org/documentation/userguide/) to here to generate PDF conveniently.
+
+# License
+CC BY-SA 3.0
