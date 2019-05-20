@@ -64,10 +64,10 @@
 * [Grid refinement](GridRefinement.md/#GridRefinement)
     - Overview
     - Multi-layer grid refinement
-* Parallelism
+* [Parallelism](Parallelism.md/#Parallelism)
     - Parallel programming approach
     - Controlling the efficiency
-* Data processors for non-local operations and couplings between blocks
+* [Data processors for non-local operations and couplings between blocks](DataProcessors.md/#DataProcessors)
     - Using helper functions to avoid explicitly writing data processors
     - Convenience wrappers for local operations
     - Writing data processors (or actually, data-processing functionals)
