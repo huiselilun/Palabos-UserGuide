@@ -78,13 +78,13 @@ void process(Box2D domain, BlockLattice2D<T,Descriptor>& lattice)
 
 You can do this without risking to access cells outside the range of the lattice if you respect two rules:
 
-    1. On nearest-neighbor lattices (D2Q9, D3Q19, etc.), you can be non-local by one cell but no more (you may write `lattice.get(iX+1,iY)` but not `lattice.get(iX+2,iY))`. On a lattice with extended neighborhood you can also extend the distance at which you access neighboring cells in a data processor. The amount of allowed non-locality is determined by the constant `Descriptor<T>::vicinity`.
+1. On nearest-neighbor lattices (D2Q9, D3Q19, etc.), you can be non-local by one cell but no more (you may write `lattice.get(iX+1,iY)` but not `lattice.get(iX+2,iY))`. On a lattice with extended neighborhood you can also extend the distance at which you access neighboring cells in a data processor. The amount of allowed non-locality is determined by the constant `Descriptor<T>::vicinity`.
 
-    2. Non-local operations are not allowed in data processors which act on the communication envelope (Section `The methods you need to override` explains what this means).
+2. Non-local operations are not allowed in data processors which act on the communication envelope (Section `The methods you need to override` explains what this means).
 
 To conclude this sub-section, let’s summarize the things you are allowed to do in a data processors, and the things you are not allowed to. You are allowed to access the cells in the provided range (plus the nearest neighbors, or a few more neighbors according to the lattice topology), to read them and to modify them. The operation which you perform can be space dependent, but this space dependency must be generic and cannot depend on the specific coordinates of the argument `domain` provided to the function `process`. This is an extremely important point which we shall line out as the Rule 0 of data processors:
 
-    **Rule 0 of data processors::** A data processor must always be written in such a way that executing the data processor on a given domain has the same effect as splitting the domain into two sub-domains, and then executing the data processor consecutively on each of these sub-domains.
+**Rule 0 of data processors::** A data processor must always be written in such a way that executing the data processor on a given domain has the same effect as splitting the domain into two sub-domains, and then executing the data processor consecutively on each of these sub-domains.
 
 In practice, this means that you are not allowed to make any logical decision based on the parameters `x0`, `x1`, `y0`, or `y1` of the argument `domain`, or directly based on the indices `iX` or `iY`. Instead, these local indices must first be converted to global ones, independent of the sub-division of the data processor, as explained in Section `Absolute and relative position`.
 
@@ -96,63 +96,63 @@ Class BoxProcessingFunctionalXD<T>
 void processGenericBlocks(BoxXD domain, std::vector<AtomicBlockXD<T>*> atomicBlocks);
 ```
 
-    This class is practically never used. It is the fall-back option when everything else fails. It handles an arbitrary number of blocks of arbitrary type, which were casted to the generic type `AtomicBlockXD`. Before use, you need to cast them back to their real type.
+This class is practically never used. It is the fall-back option when everything else fails. It handles an arbitrary number of blocks of arbitrary type, which were casted to the generic type `AtomicBlockXD`. Before use, you need to cast them back to their real type.
 
 ```C++
 Class LatticeBoxProcessingFunctionalXD<T,Descriptor>
 void process(BoxXD domain, std::vector<BlockLatticeXD<T,Descriptor>*> lattices);
 ```
 
-    Use this class to process an arbitrary number of block-lattices, and potentially create a coupling between them. This data-processing functional is for example used to define a coupling between an arbitrary number of lattice for the Shan/Chen multi-component model defined in the files `src/multiPhysics/shanChenProcessorsXD.h` and `.hh`. This type of data-processing functional is not very frequently used either, as the two-block versions listed below are more appropriate in most cases.
+Use this class to process an arbitrary number of block-lattices, and potentially create a coupling between them. This data-processing functional is for example used to define a coupling between an arbitrary number of lattice for the Shan/Chen multi-component model defined in the files `src/multiPhysics/shanChenProcessorsXD.h` and `.hh`. This type of data-processing functional is not very frequently used either, as the two-block versions listed below are more appropriate in most cases.
 
 ```C++
 Class ScalarFieldBoxProcessingFunctionalXD<T>
 void process(BoxXD domain, std::vector<ScalarFieldXD<T>*> fields);
 ```
 
-    Same as above, applied to scalar-fields.
+Same as above, applied to scalar-fields.
 
 ```C++
 Class TensorFieldBoxProcessingFunctionalXD<T,nDim>
 void process(BoxXD domain, std::vector<TensorFieldXD<T,nDim>*> fields);
 ```
 
-    Same as above, applied to tensor-fields.
+Same as above, applied to tensor-fields.
 
 ```C++
 Class BoxProcessingFunctionalXD_L<T,Descriptor>
 void process(BoxXD domain, BlockLatticeXD<T,Descriptor>& lattice);
 ```
 
-    Data processor acting on a single lattice.
+Data processor acting on a single lattice.
 
 ```C++
 Class BoxProcessingFunctionalXD_S<T>
 void process(BoxXD domain, ScalarFieldXD<T>& field);
 ```
 
-    Data processor acting on a single scalar-field.
+Data processor acting on a single scalar-field.
 
 ```C++
 Class BoxProcessingFunctionalXD_T<T,nDim>
 void process(BoxXD domain, TensorFieldXD<T,nDim>& field);
 ```
 
-    Data processor acting on a single tensor-field.
+Data processor acting on a single tensor-field.
 
 ```C++
 Class BoxProcessingFunctionalXD_LL<T,Descriptor1,Descriptor2>
 void process(BoxXD domain, BlockLatticeXD<T,Descriptor1>& lattice1, BlockLatticeXD<T,Descriptor2>& lattice2);
 ```
 
-    Data processor for processing and/or coupling two lattices with potentially different descriptors. Similarly, there is an `SS` version for two scalar-fields, and a `TT` version for two tensor-fields with potentially different dimensionality nDim.
+Data processor for processing and/or coupling two lattices with potentially different descriptors. Similarly, there is an `SS` version for two scalar-fields, and a `TT` version for two tensor-fields with potentially different dimensionality nDim.
 
 ```C++
 Class BoxProcessingFunctionalXD_LS<T,Descriptor>
 void process(BoxXD domain, BlockLatticeXD<T,Descriptor>& lattice, ScalarFieldXD<T>& field);
 ```
 
-    Data processor for processing and/or coupling a lattice and a scalar-field. Similarly, there is an `LT` and an `ST` version for the lattice-tensor and the scalar-tensor case.
+Data processor for processing and/or coupling a lattice and a scalar-field. Similarly, there is an `LT` and an `ST` version for the lattice-tensor and the scalar-tensor case.
 
 For each of these processing functionals, there exists a “reductive” version (e.g. `ReductiveBoxProcessingFuncionalXD_L`) for the case that the data processor performs a reduction operation and returns a value.
 
@@ -182,11 +182,12 @@ The third method, method `appliesTo` is used to decide whether the data processo
 
 If you decide to include the envelope into the application area of the data processor, you must however respect the two following rules. Otherwise, undefined behavior shall arise.
 
-    1. The data processor must be entirely local, because there are no additional envelopes available to cope with non-local data access.
+1. The data processor must be entirely local, because there are no additional envelopes available to cope with non-local data access.
 
-    2. The data processor can have write access to at most one of the involved blocks (the vector `isWritten` returned from the method `getModificationPattern()` can have the value true at most at one place).
+2. The data processor can have write access to at most one of the involved blocks (the vector `isWritten` returned from the method `getModificationPattern()` can have the value true at most at one place).
 
 ### Absolute and relative position
+
 The coordinates `iX` and `iY` used in the space loop of a data processor are pretty useless for anything else than the execution of the loop, because they represent local variables of an atomic-block, which is itself situated at a random position inside the overall multi-block. To make decision depending on a space position, the local coordinates must therefore first be converted to global ones:
 
 ```C++
@@ -195,10 +196,10 @@ Dot2D relativePosition = lattice.getLocation();
 
 // Convert local coordinates to global ones.
 plint globalX = iX + relativePosition.x;
-plint globaly = iY + relativePosition.x;
+plint globaly = iY + relativePosition.y;   /// It is different between here and website. I think it is a mistake on the website.
 ```
 
-An example is provided in the directory examples/showCases/boussinesqThermal2d/. This conversion is a bit awkward, and this is again a good reason to use the one-cell functionals presented in Section Convenience wrappers for local operations, which do the job automatically for you.
+An example is provided in the directory `examples/showCases/boussinesqThermal2d/`. This conversion is a bit awkward, and this is again a good reason to use the one-cell functionals presented in Section Convenience wrappers for local operations, which do the job automatically for you.
 
 Similarly, if you execute a data processor on more than just one block, the relative coordinates are not necessarily the same in all involved blocks. If you measure things in global coordinates, then the argument domain of the method process always overlaps with all of the involved blocks. This is something which is guaranteed by the algorithm implemented in Palabos. However, all multi-blocks on which the data processor is applied are not necessarily working with the same internal data distribution, and have potentially a different interpretation of local coordinates. The argument domain of the method process is always provided as local coordinates of the first atomic-block. To get at the coordinates of the other blocks, a corresponding conversion must be applied:
 
@@ -214,6 +215,8 @@ plint iY2 = iY + offset_0_2.y;
 
 Again, this process is illustrated in the example in `examples/showCases/boussinesqThermal2d/`. This displacement needs to be computed if any of the following conditions is verified (if you are unsure, it is best to compute the displacement by default):
 
-    1. The multi-blocks on which the data processor is applied don’t have the same data distribution, because they were constructed differently.
-    2. The multi-blocks on which the data processor is applied don’t have the same data distribution, because they don’t have the same size. This is the case for all functions like `computeVelocity`, which computes the velocity on a sub-domain of the lattice. It uses a data-processor which acts on the original lattice (which is big) and the velocity field (which can be smaller because it has the size of the sub-domain).
-    3. The data processor includes the envelope. In this case, a relative displacement stems from the fact that bulk nodes are coupled with envelope nodes from a different atomic-block. This is one more reason why it is generally better not to include the envelope it the application domain of a data processor.
+1. The multi-blocks on which the data processor is applied don’t have the same data distribution, because they were constructed differently.
+
+2. The multi-blocks on which the data processor is applied don’t have the same data distribution, because they don’t have the same size. This is the case for all functions like `computeVelocity`, which computes the velocity on a sub-domain of the lattice. It uses a data-processor which acts on the original lattice (which is big) and the velocity field (which can be smaller because it has the size of the sub-domain).
+
+3. The data processor includes the envelope. In this case, a relative displacement stems from the fact that bulk nodes are coupled with envelope nodes from a different atomic-block. This is one more reason why it is generally better not to include the envelope it the application domain of a data processor.
