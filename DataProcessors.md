@@ -220,3 +220,44 @@ Again, this process is illustrated in the example in `examples/showCases/boussin
 2. The multi-blocks on which the data processor is applied don’t have the same data distribution, because they don’t have the same size. This is the case for all functions like `computeVelocity`, which computes the velocity on a sub-domain of the lattice. It uses a data-processor which acts on the original lattice (which is big) and the velocity field (which can be smaller because it has the size of the sub-domain).
 
 3. The data processor includes the envelope. In this case, a relative displacement stems from the fact that bulk nodes are coupled with envelope nodes from a different atomic-block. This is one more reason why it is generally better not to include the envelope it the application domain of a data processor.
+
+## Executing, integrating, and wrapping up data-processing functionals
+There are basically two ways of using a data processor. In the first case, the processor is executed just once, on one or more blocks, through a call to the function `executeDataProcessor`. In the second case, the processor is added to a block through a call to the function `addInternalProcessor`, and then adopts the role of an internal data processor. An internal data processor is part of the block and can be executed as many times as wished by calling the method `executeInternalProcessors` of this block. This approach is typically chosen when the data processing step is part of the algorithm of the fluid solver. As examples, consider the non-local parts of boundary conditions, the coupling between components in a multi-component fluid, or the coupling between the fluid and the temperature field in a thermal code with Boussinesq approximation. In a block-lattice, internal processors have a special role, because the method `executeInternalProcessors` is automatically invoked at the end of the method `collideAndStream()` and of the method `stream()`. This behavior is based on the assumption that `collideAndStream()` represents a full lattice Boltzmann iteration cycle, and `stream()`, if used, stands at the end of such a cycle. The internal processors are therefore considered to be part of a lattice Boltzmann iteration and are executed at the very end, after the collision and the streaming step.
+
+For convenience, the function call to `executeDataProcessor` and to `addInternalProcessor` was redefined for each type of data-processing functional introduced in Section `Categories of data-processing functionals`, and the new functions are called `applyProcessingFunctional` and `integrateProcessingFunctional` respectively. To execute for example a data-processing functional of type `BoxProcessingFunctional2D_LS` on the whole domain of a given lattice and scalar field (they can be either of type multi-block or atomic-block), the function call to use has the form
+
+```C++
+applyProcessingFunctional (
+    new MyFunctional<T,Descriptor>, lattice.getBoundingBox(),
+    lattice, scalarField );
+```
+
+All predefined data-processing functionals in Palabos are additionally wrapped in a convenience function, in order to simplify the syntax. For example, one of the three versions of the function `computeVelocityNorm` for 2D fields is defined in the file `src/multiBlock/multiDataAnalysis2D.hh` as follows:
+
+```C++
+template<typename T, template<typename U> class Descriptor>
+void computeVelocity( MultiBlockLattice2D<T,Descriptor>& lattice,
+                      MultiTensorField2D<T,Descriptor<T>::d>& velocity,
+                      Box2D domain )
+{
+    applyProcessingFunctional (
+            new BoxVelocityFunctional2D<T,Descriptor>, domain, lattice, velocity );
+}
+```
+
+## Execution order of internal data processors
+There are different ways to control the order in which internal data processors are executed in the function call `executeInternalProcessors()`. First of all, each data processor is attributed to a processor level, and these processor levels are traversed in increasing order, starting with level 0. By default, all internal processors are attributed to level 0, but you have the possibility to put them into any other level, specified as the last, optional parameter of the function `addInternalProcessor` or `integrateProcessingFunctional`. Inside a processor level, the data processors are executed in the order in which they were added to the block. Additionally to imposing an order of execution, the attribution of data processors to a given level has an influence on the communication pattern inside multi-blocks. As a matter of fact, communication is not immediately performed after the execution of a data processor with write access, but only when switching from one level to the next. In this way, all MPI communication required for by the data processors within one level is bundled and executed more efficiently. To clarify the situation, let us write down the details of one iteration cycle of a block-lattice which has data processors at level 0 and at level 1 and automatically executes them at the end of the function call `collideAndStream`:
+
+1. Execute the local collision, followed by a streaming step.
+
+2. Execute the data processors at level 0. No communication has been made so far. Therefore, the data processors at this level have only a restricted ability to perform non-local operations, because the cell data in the communication envelopes is erroneous.
+
+3. Execute a communication between the atomic-blocks of the block-lattice to update the envelopes. If any other, external blocks (lattice, scalar-field or tensor-field) were modified by any of the data processors at level 0, update the envelopes in these blocks as well.
+
+4. Execute the data processors at level 1.
+
+5. If the block-lattice or any other, external blocks were modified by any of the data processors at level1, update the envelopes correspondingly.
+
+Although this behavior may seem a bit complicated, it leads to an intuitive behavior of the program and offers a general way to control the execution of data processors. It should be specially emphasized that if a data processor B depends on data produced previously by another data processor A, you must make sure that a proper causality relation between A and B is implemented. In all cases, B must be executed after A. Additionally, if B is non-local (and therefore accesses data on the envelopes) and A is a bulk-only data-processor, it is required that a communication step is executed between the execution of A and B. Therefore, A and B must be defined on different processor levels.
+
+If you execute data processors manually, you can choose to execute only the processors of a given level, by indicating the level as an optional parameter of the method `executeInternalProcessors(plint level)`. It should also be mentioned that a processor level can have a negative value. The advantage of a negative processor level is that it is not executed automatically through the default function call `executeInternalProcessors()`. It can only be executed manually through the call `executeInternalProcessors(plint level)`. It makes sense to exploit this behavior for data processors which are executed often, but not at every iteration step. Calling `applyProcessingFunctional` each time would be somewhat less efficient, because an overhead is incurred by the decomposition of the data processor over internal atomic-blocks.
