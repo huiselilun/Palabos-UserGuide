@@ -80,7 +80,7 @@
 * [Appendix: partial function/class reference](PartialFunctionClassReference.md/#PFCR)
     - Mutable (in-place) operations for simulation setup and other purposes
     - Non-mutable operations for data analysis and other purposes
-* Appendix: Copyright and license agreements
+* [Appendix: Copyright and license agreements](CopyrightLicenseAgreements.md/#CLA)
     - Copyright of the Palabos user guide
     - Copyright and open-source license for Palabos
     - GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007
