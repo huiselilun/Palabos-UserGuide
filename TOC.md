@@ -71,13 +71,13 @@
     - Using helper functions to avoid explicitly writing data processors
     - Convenience wrappers for local operations
     - Writing data processors (or actually, data-processing functionals)
-* Utilities
+* [Utilities](Utilities.md/#Utilities)
     - Timer
     - Value tracer
-* Appendix: list of example programs
+* [Appendix: list of example programs](ListofExamplePrograms.md/#LoEP)
     - Directory examples/showCases
     - Directory examples/codesByTopic
-* Appendix: partial function/class reference
+* [Appendix: partial function/class reference](PartialFunctionClassReference.md/#PFCR)
     - Mutable (in-place) operations for simulation setup and other purposes
     - Non-mutable operations for data analysis and other purposes
 * Appendix: Copyright and license agreements
