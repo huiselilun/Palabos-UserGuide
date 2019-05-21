@@ -6,15 +6,15 @@ Some of these functions accept in their argument list so-called â€œfunctionalsâ€
 
 `OneCellFunctional3D`
 
-    This functional is used to specify a fully local action to be performed on a subset of cells of a lattice. The action is defined by overriding the virtual function `void OneCellFunctional3D::execute(Cell<T,Descriptor>& cell) const`.
+> This functional is used to specify a fully local action to be performed on a subset of cells of a lattice. The action is defined by overriding the virtual function `void OneCellFunctional3D::execute(Cell<T,Descriptor>& cell) const`.
 
 `OneCellIndexedFunctional3D`
 
-    With this functional, a fully local, but space-dependent action is performed on a subset of cells of a lattice. The action is defined by overriding the virtual function `void OneCellIndexedFunctional3D::execute(plint iX, plint iY, plint iZ, Cell<T,Descriptor>& cell) const`.
+> With this functional, a fully local, but space-dependent action is performed on a subset of cells of a lattice. The action is defined by overriding the virtual function `void OneCellIndexedFunctional3D::execute(plint iX, plint iY, plint iZ, Cell<T,Descriptor>& cell) const`.
 
 `DomainFunctional3D`
 
-    This functional is used to define the region on a lattice on which an action is performed. The region is defined by overriding the virtual function `bool DomainFunctional3D::operator() (plint iX, plint iY, plint iZ) const`.
+> This functional is used to define the region on a lattice on which an action is performed. The region is defined by overriding the virtual function `bool DomainFunctional3D::operator() (plint iX, plint iY, plint iZ) const`.
 
 Finally, some functions make use of static functionals which, thanks to template mechanisms, are exempt from an inheritance hierarchy. Their syntax depends on the context. For example, the functional `Function f` of the function `setBoundaryDensity` must define a method of the form `T operator() (plint iX, plint iY, plint iZ)`, which returns a value for the density at each space point.
 
