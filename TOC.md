@@ -1,10 +1,10 @@
-* Introduction
+* [Introduction](Introduction.md/#Introduction)
     - What is Palabos?
     - Functionality covered by Palabos
     - Project
     - Authors
     - Getting help
-* Getting started with Palabos
+* [Getting started with Palabos](GettingStarted.mc/#GettingStarted)
     - Supported Compilers
     - Installing and compiling the code under Linux and other Unix-like systems
     - Compilation under Mac OS X
