@@ -1,4 +1,4 @@
-# The Palabos-Java interface<div id="JavaInterface"><\div>
+# The Palabos-Java interface<div id="JavaInterface"></div>
 **Important: To get Palabos up and running, it is not necessary to compile the Palabos-Java interface. The Java interface is a useful extension which you will find useful to develop your Palabos applications more rapidly.**
 
 Since version 1.1, Palabos is provided with a Java interface which offers an access to the library to programmers lacking a C++ culture. The look-and-feel of the Java interface is very different from the C++ interface, and a separate user’s guide will be provided at some point for this library. In the mean time, this section provides a few instructions for compiling and using the Java interface.
