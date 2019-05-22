@@ -16,7 +16,7 @@
 * [The Palabos-Python interface](PythonInterface.md/#PythonInterface)
     - Compiling the Python interface
     - Example: Compiling the Python interface under Ubuntu Linux
-* The Palabos-Java interface
+* [The Palabos-Java interface](JavaInterface.md/#JavaInterface)
     - Introduction
     - Installation
 * Programming with Palabos

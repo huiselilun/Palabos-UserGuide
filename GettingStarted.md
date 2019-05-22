@@ -50,7 +50,7 @@ global::directories().setOutputDir(".\\tmp\\");
 
 although the programs appear to behave reasonably well even when you don’t do this.
 
-## Compilation on a BlueGene/P¶
+## Compilation on a BlueGene/P
 On the BlueGene/P, the compilation procedure is the same as on any Unix-like system. Just remember to define the preprocessor macro `PLB_BGP` (set the corresponding line in the Makefile to `compileFlags= -DPLB_BGP`). Also, note that on the BlueGene, the GCC compiler produces code that is almost as fast as (and sometimes even than) the dedicated XL compiler. Furthermore, GCC compiles much faster.
 
 It must also be pointed out the BlueGene/P uses a Big-Endian representation of numerical values, as opposed to x86 architectures that use Little-Endian. You can therefore not export binary checkpoint files from the BlueGene to an x86 computer. BlueGene-generated VTK files on the other hand can be read on an Intel PC: just replace the string `LittleEndian` to `BigEndian` in your VTK file. You can for example to this with `sed`: `sed -i "s/LittleEndian/BigEndian/g" myOutputFile.vti`. As for the input STL meshes, it is simplest to provide them in an ASCII STL format, which is platform independent. If your mesh happens to be binary STL, you can convert it to ASCII using the program `toAsciiSTL` in the directory `utility/stl`.
