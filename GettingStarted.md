@@ -9,11 +9,13 @@ The library Palabos makes use of an on-demand compilation process. The code is c
 
 To use a different compiler, compile for parallel execution, or modify other compilation options, edit the file Makefile in the local directory. The following options are particularly often modified:
 
-debug:	Turn on this flag to compile in debug mode. The resulting executable is a bit slower but easier to analyze in search for bugs. The recommended default behavior is to turn on debug mode.
-MPIparallel:	Turn on this flag to compile for parallel execution.
-serialCXX:	Specify the compiler to use for serial programs.
-parallelCXX:	Specify the compiler to use for parallel programs.
-optimFlags:	Specify the compiler options to use when the flag optimize is true.
-compileFlags:	Specify additional compiler options, which are for example specific to your hardware environment. Typical options are -DPLB_BGP or -DPLB_MAC_OS_X when compiling on a BlueGene or on a Mac respectively.
+| :------- | :---------- |
+| debug:	|Turn on this flag to compile in debug mode. The resulting executable is a bit slower but easier to analyze in search for bugs. The recommended default behavior is to turn on debug mode.|
+| MPIparallel:	| Turn on this flag to compile for parallel execution.|
+| serialCXX:	| Specify the compiler to use for serial programs.|
+| parallelCXX:	| Specify the compiler to use for parallel programs.|
+| optimFlags:	| Specify the compiler options to use when the flag `optimize` is true.|
+| compileFlags:	| Specify additional compiler options, which are for example specific to your hardware environment. Typical options are `-DPLB_BGP` or `-DPLB_MAC_OS_X` when compiling on a BlueGene or on a Mac respectively.|
 
 If MPI is installed on your system (and if you have several cores or processors available), you can try to compile the code in parallel and execute it, say with two threads, through a command of the type `mpirun -np 2 ./cavity2d`. Note that the execution time of the example program is dominated by output operations. **To observe a significant speed improvement in the parallel program, the output operations need first to be commented in the source code.**
+
