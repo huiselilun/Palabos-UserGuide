@@ -4,4 +4,6 @@ Copy the User's Guide in [palabos.org](http://www.palabos.org/documentation/user
 [Here is the Table of Content](TOC.md).
 
 # License
-CC BY-SA 3.0
+GNU AFFERO GENERAL PUBLIC LICENSE Version 3
+
+[Appendix: Copyright and license agreements](CopyrightLicenseAgreements.md/#CLA)
