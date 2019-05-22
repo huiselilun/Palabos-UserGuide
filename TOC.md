@@ -13,7 +13,7 @@
     - Open-source libraries which are bundled with Palabos
     - Recommended open-source software
     - The examples directory
-* The Palabos-Python interface
+* [The Palabos-Python interface](PythonInterface.md/#PythonInterface)
     - Compiling the Python interface
     - Example: Compiling the Python interface under Ubuntu Linux
 * The Palabos-Java interface
