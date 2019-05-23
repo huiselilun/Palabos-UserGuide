@@ -22,7 +22,7 @@
 * [Programming with Palabos](Programming.md/#Programming)
     - Quick overview: programming guidelines
     - Non-intrusive program development with Palabos
-* [Fundamental data types]()
+* [Fundamental data types](FundamentalDataTypes.md/#FundamentalDataTypes)
     - The BlockXD data structures
     - Lattice descriptors
     - The dynamics classes
