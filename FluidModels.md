@@ -84,9 +84,9 @@ In this model, each component is simulated on a separate block-lattice, and the 
 In this model, the Shan/Chen data processor takes an additional argument which defines the shape of the inter-particle potential. The following potentials are defined (see the file `src/multiPhysics/interparticlePotential.h` for details):
 
 - PsiIsRho()                ![](http://latex.codecogs.com/gif.latex?\\Psi=\\rho)
-- PsiShanChen93(rho0)	    ![](http://latex.codecogs.com/gif.latex?\\Psi = \\rho_0\\left(1-e^{-\\rho/\\rho_0} \\right))
-- PsiShanChen94(Psi0,rho0)	![](http://latex.codecogs.com/gif.latex?\\Psi = \\Psi_0\\, e^{-\\rho_0/\\rho})
-- PsiQian95(rho0,g)	        ![](http://latex.codecogs.com/gif.latex?\\Psi = g\\,\\rho_0^2\\, \\rho^2 / (2(\\rho_0+\\rho)^2))
+- PsiShanChen93(rho0)	    ![](http://latex.codecogs.com/gif.latex?\\Psi=\\rho_0\\left(1-e^{-\\rho/\\rho_0}\\right))
+- PsiShanChen94(Psi0,rho0)	![](http://latex.codecogs.com/gif.latex?\\Psi=\\Psi_0\\,e^{-\\rho_0/\\rho})
+- PsiQian95(rho0,g)	        ![](http://latex.codecogs.com/gif.latex?\\Psi=g\\,\\rho_0^2\\,\\rho^2/(2(\\rho_0+\\rho)^2))
 
 Please remark that in this model, the fluid density must be carefully adapted to the amplitude of the interaction force in order to enter the critical regime in which phase separation occurs.
 
@@ -104,7 +104,7 @@ As an example, a dam break application is provided in `examples/showCases/breaki
 ### Static Smagorinsky model
 In the Smagorinsky model, it is assumed that the subgrid scales have the effect of a viscosity correction which is proportional to the norm of the strain-rte tensor at the level of the filtered scales, *:math: nu = nu_0 + nu_T*. The formula for the turbulent viscosity correction nuT is
 
-![](http://latex.codecogs.com/gif.latex?\\nu_T = C^2 \\left|S\\right|)
+![](http://latex.codecogs.com/gif.latex?\\nu_T=C^2\\left|S\\right|)
 
 where *C* is the Smagorinsky constant, and the tensor-norm of the strain rate is defined as ![](http://latex.codecogs.com/gif.latex?\\left|S\\right|=\\sqrt{S:S}) (attention: there is no factor 1/2 inside the square-root, as it can be found in other definitions). The value of the Smagorinsky constant depends on the physics of the problem, and usually varies between 0.1 and 0.2 far from boundaries. This model is called static because the value of the Smagorinsky constant is imposed and does not change in time.
 
