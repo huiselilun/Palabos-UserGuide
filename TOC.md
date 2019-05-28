@@ -27,7 +27,7 @@
     - Lattice descriptors
     - The dynamics classes
     - Data processors
-* Implemented fluid models
+* [Implemented fluid models](FluidModels.md/#FluidModels)
     - Non-thermal Navier-Stokes equations
     - Thermal flows with Boussinesq approximation
     - Multi-component and multi-phase fluids
