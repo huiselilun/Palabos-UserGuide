@@ -65,7 +65,7 @@ The coupling between the temperature field and the fluid solver is implemented b
 - Reference: guo-02c
 
 ## Multi-component and multi-phase fluids
-The widely used Shan/Chen models for immiscible multi-component fluids and for single-component multi-phase fluids are implemented in Palabos, in 2D and in 3D. Note that a lot of information about the theory and practical aspects of these models can be found in the book [Sukop-and-Thorne](<sup>[1](#myfootnote1)</sup>).
+The widely used Shan/Chen models for immiscible multi-component fluids and for single-component multi-phase fluids are implemented in Palabos, in 2D and in 3D. Note that a lot of information about the theory and practical aspects of these models can be found in the book [Sukop-and-Thorne]<sup>[1](#myfootnote1)</sup>.
 
 In both models, an inter-particle force term needs to be computed which is not entirely local. This force term is therefore computed by a data processor. This data processor needs to know the density and the velocity on a given lattice node (in the multi-component model, these macroscopic variables must be known for all components). To avoid computing these variables twice, as they need also to be known for the subsequent, normal collision step, they are written by the data processor to an external scalar of the cell, and then re-used by the dynamics object for the collision. It is therefore necessary to use a lattice descriptor which provides space for these external scalars, such as `ShanChenD2Q9Descriptor`, or `ForcedShanChenD2Q9Descriptor` if additionally to the inter-particle potential there is an external body force. In 3D, the same descriptors are available for the D3Q19 lattice (and other descriptors are easy to formulate). To be sure to read the macroscopic variables from external scalars during the collision step, use the classes `ExternalMomentBGKdynamics` or `ExternalMomentRegularizedBGKdynamics` for the fluid model.
 
@@ -83,10 +83,10 @@ In this model, each component is simulated on a separate block-lattice, and the 
 ### Single-component Shan/Chen multi-phase model
 In this model, the Shan/Chen data processor takes an additional argument which defines the shape of the inter-particle potential. The following potentials are defined (see the file `src/multiPhysics/interparticlePotential.h` for details):
 
-- PsiIsRho()                $\Psi=\rho$
-- PsiShanChen93(rho0)	    $\Psi = \rho_0\left(1-e^{-\rho/\rho_0} \right)$
-- PsiShanChen94(Psi0,rho0)	$\Psi = \Psi_0\, e^{-\rho_0/\rho}$
-- PsiQian95(rho0,g)	        $\Psi = g\,\rho_0^2\, \rho^2 / (2(\rho_0+\rho)^2)$
+- PsiIsRho()                ![](http://latex.codecogs.com/gif.latex?\\Psi=\\rho
+- PsiShanChen93(rho0)	    ![](http://latex.codecogs.com/gif.latex?\\Psi = \\rho_0\\left(1-e^{-\\rho/\\rho_0} \\right)
+- PsiShanChen94(Psi0,rho0)	![](http://latex.codecogs.com/gif.latex?\\Psi = \\Psi_0\\, e^{-\\rho_0/\\rho}
+- PsiQian95(rho0,g)	        ![](http://latex.codecogs.com/gif.latex?\\Psi = g\\,\\rho_0^2\\, \\rho^2 / (2(\\rho_0+\\rho)^2)
 
 Please remark that in this model, the fluid density must be carefully adapted to the amplitude of the interaction force in order to enter the critical regime in which phase separation occurs.
 
@@ -104,15 +104,15 @@ As an example, a dam break application is provided in `examples/showCases/breaki
 ### Static Smagorinsky model
 In the Smagorinsky model, it is assumed that the subgrid scales have the effect of a viscosity correction which is proportional to the norm of the strain-rte tensor at the level of the filtered scales, *:math: nu = nu_0 + nu_T*. The formula for the turbulent viscosity correction nuT is
 
-$$\nu_T = C^2 \left|S\right|$$
+![](http://latex.codecogs.com/gif.latex?\\nu_T = C^2 \\left|S\\right|
 
-where *C* is the Smagorinsky constant, and the tensor-norm of the strain rate is defined as $\left|S\right| = \sqrt{S:S}$ (attention: there is no factor 1/2 inside the square-root, as it can be found in other definitions). The value of the Smagorinsky constant depends on the physics of the problem, and usually varies between 0.1 and 0.2 far from boundaries. This model is called static because the value of the Smagorinsky constant is imposed and does not change in time.
+where *C* is the Smagorinsky constant, and the tensor-norm of the strain rate is defined as ![](http://latex.codecogs.com/gif.latex?\\left|S\\right|=\\sqrt{S:S} (attention: there is no factor 1/2 inside the square-root, as it can be found in other definitions). The value of the Smagorinsky constant depends on the physics of the problem, and usually varies between 0.1 and 0.2 far from boundaries. This model is called static because the value of the Smagorinsky constant is imposed and does not change in time.
 
-In the Palabos implementation, the strain-rate is computed from the stress tensor $\Pi$. It is remarked that the relationship between $S$ and $\Pi$ contains depends on the relaxation time $\tau$, and therefore on the viscosity nu. The formula for the turbulent viscosity nuT is therefore implicit, but is of second-order only and can therefore be solved explicitly.
+In the Palabos implementation, the strain-rate is computed from the stress tensor ![](http://latex.codecogs.com/gif.latex?\\Pi. It is remarked that the relationship between *S* and ![](http://latex.codecogs.com/gif.latex?\\Pi contains depends on the relaxation time ![](http://latex.codecogs.com/gif.latex?\\tau, and therefore on the viscosity nu. The formula for the turbulent viscosity nuT is therefore implicit, but is of second-order only and can therefore be solved explicitly.
 
-Given that the stress tensor $\Pi$ can be computed from local variables on a cell, the Smagorinsky model is entirely local and is implemented in Palabos through a dynamics class. As so often, there are several implementations for this model. The generic one, based on composite-dynamics objects, adds a Smagorinsky viscosity correction to any existing dynamics during runtime. The specific ones are written explicitly for the BGK and for the regularized BGK models, and are therefore somewhat more efficient. In each case, the value of the viscosity is modified before the execution of the usual collision step. Therefore, if during a simulation you access the relaxation parameter $\omega$ at a cell, for example through a function call `lattice.get(x,y).getOmega()`, you get the relaxation parameter related to the effective viscosity $\nu$, and not the “molecular-scale viscosity” $\nu_0$.
+Given that the stress tensor ![](http://latex.codecogs.com/gif.latex?\\Pi can be computed from local variables on a cell, the Smagorinsky model is entirely local and is implemented in Palabos through a dynamics class. As so often, there are several implementations for this model. The generic one, based on composite-dynamics objects, adds a Smagorinsky viscosity correction to any existing dynamics during runtime. The specific ones are written explicitly for the BGK and for the regularized BGK models, and are therefore somewhat more efficient. In each case, the value of the viscosity is modified before the execution of the usual collision step. Therefore, if during a simulation you access the relaxation parameter ![](http://latex.codecogs.com/gif.latex?\\omega at a cell, for example through a function call `lattice.get(x,y).getOmega()`, you get the relaxation parameter related to the effective viscosity ![](http://latex.codecogs.com/gif.latex?\\nu, and not the “molecular-scale viscosity” ![](http://latex.codecogs.com/gif.latex?\\nu_0.
 
-The value of the Smagorinsky constant must be provided to these dynamics classes as a constructor argument. It is important to note that the dynamics object of each cell can have a different value of the Smagorinsky constant: this “constant” can be space dependent. This is useful for example to model boundary layers, where the Smagorinsky constant drops to zero. The most convenient way to create a simulation with space-dependent Smagorinsky constant is to assign the Smagorinsky dynamics to each cell of the lattice from within a data processor which is aware of the desired value of the $C$ as a function of space.
+The value of the Smagorinsky constant must be provided to these dynamics classes as a constructor argument. It is important to note that the dynamics object of each cell can have a different value of the Smagorinsky constant: this “constant” can be space dependent. This is useful for example to model boundary layers, where the Smagorinsky constant drops to zero. The most convenient way to create a simulation with space-dependent Smagorinsky constant is to assign the Smagorinsky dynamics to each cell of the lattice from within a data processor which is aware of the desired value of the *C* as a function of space.
 
 - Generic Dynamics: SmagorinskyDynamics
 - Dynamics for BGK: SmagorinskyBGKdynamics
@@ -124,11 +124,11 @@ The value of the Smagorinsky constant must be provided to these dynamics classes
 ### Carreau model
 In the Carreau model, the value of the viscosity is adjusted, just like in the Smagorinsky model, depending on the value of the local strain-rate. The constitutive equation is given by
 
-$$\nu=\nu_0*(1+(\lambda*\left|S\right|)^2)^{(n-1)/2}$$
+![](http://latex.codecogs.com/gif.latex?\\nu=\\nu_0*(1+(\\lambda*\\left|S\\right|)^2)^{(n-1)/2}
 
-where $\lambda$ and $n$ are given real parameters. As for the Smagorinsky model, the strain rate $S$ is computed from the stress tensor $\Pi$, and the resulting equation is implicit because the $S$ vs. $\Pi$ relation is dependent on the relaxation time $\tau$. In the present case however, there is no explicit solution, and the equation is solved at each time step through a fixed-point iteration (which in this case converges very quickly and is therefore more efficient than a gradient-based solution method).
+where ![](http://latex.codecogs.com/gif.latex?\\lambda and *n* are given real parameters. As for the Smagorinsky model, the strain rate *S* is computed from the stress tensor ![](http://latex.codecogs.com/gif.latex?\\Pi, and the resulting equation is implicit because the *S* vs. ![](http://latex.codecogs.com/gif.latex?\\Pi relation is dependent on the relaxation time ![](http://latex.codecogs.com/gif.latex?\\tau. In the present case however, there is no explicit solution, and the equation is solved at each time step through a fixed-point iteration (which in this case converges very quickly and is therefore more efficient than a gradient-based solution method).
 
-In this implementation, the parameters $\nu_0$, $\lambda$ and $n$ cannot be space-dependent, and they are set through a function call to the global singleton CarreauParameters. for example:
+In this implementation, the parameters ![](http://latex.codecogs.com/gif.latex?\\nu_0, ![](http://latex.codecogs.com/gif.latex?\\lambda and *n* cannot be space-dependent, and they are set through a function call to the global singleton CarreauParameters. for example:
 
 ```C++
 global::CarreauParameters().setNu0(nu0);
