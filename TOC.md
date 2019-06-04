@@ -37,7 +37,7 @@
 * [Setting up a problem](SettingUp.md/SettingUp)
     - Attributing dynamics objects
     - Initial values of density and velocity
-* Defining boundary conditions
+* [D]efining boundary conditions]{DefiningBoundaryConditions.md/#DefiningBoundaryConditions}
     - Overview
     - Grid-aligned boundaries
     - Periodic boundaries
