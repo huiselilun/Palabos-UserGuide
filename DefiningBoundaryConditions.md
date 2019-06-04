@@ -112,7 +112,7 @@ boundaryCondition->addExternalVelocityCornerPP( nx-1, ny-1, lattice, boundary::f
 
 A distinction is made between external and internal corners, depending on whether the corner is convex or concave. On the following example geometry, you’ll find five external and one internal corner:
 
-_images/boundaries.gif
+![boundaries](figures/DefiningBoundaryConditions/boundaries.gif)
 
 The extensions like `1P`, ``NP`, and `PP` at the end of the methods of the boundary-condition object are used to indicate the orientation of the wall normal, pointing outside the fluid domain, as shown on the figure above. On a straight wall, the code `1P` means: “the wall normal points into positive y-direction”. Likewise, the inlet would be labeled with the code `0N` as in “negative x-direction”. On a corner, the code `NP` means “negative x-direction and positive y-direction”. It is important to mention that this wall normal is purely geometrical and does not depend on whether a given wall has the function of an inlet or an outlet. In both cases, the wall normal points away from the fluid, into the non-fluid area.
 
