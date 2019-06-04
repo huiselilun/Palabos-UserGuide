@@ -44,7 +44,7 @@
     - Bounce-back
     - Bounce-back domain from an STL file
     - Off-lattice boundaries from an STL file
-* Running a simulation
+* [Running a simulation](RunningASimulation.md/#RunningASimulation)
     - Time cycles of a Palabos program
     - At which point do you evaluate data?
     - Other important things to do
