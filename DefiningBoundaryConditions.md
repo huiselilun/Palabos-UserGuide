@@ -65,6 +65,7 @@ Remember that if the boundary is not located on the outer bounds of the lattice,
 ### Zero-gradient conditions
 The optional arguments like `boundary::outflow` are of type `boundary::BcType`, and can have the following values for velocity boundaries:
 
+|   |    |
 |------|-------|
 |boundary::dirichlet (default value)|	Dirichlet condition: imposed velocity value.|
 |boundary::outflow or boundary::neumann|	Zero-gradient for all velocity components.|
@@ -73,6 +74,7 @@ The optional arguments like `boundary::outflow` are of type `boundary::BcType`, 
 
 For pressure boundaries, you have the following choice:
 
+|   |    |
 |-----------|-----------|
 |boundary::dirichlet (default value)|	Dirichlet condition: imposed pressure value, zero value for the tangential velocity components.|
 |boundary::neumann|	Zero-gradient for the pressure, zero value for the tangential velocity components.|
