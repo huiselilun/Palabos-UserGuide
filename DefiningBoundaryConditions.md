@@ -214,7 +214,7 @@ plb_ifstream ifile("geometry.dat");
 ifile >> boolMask;
 ```
 
-Note that currently, no error-checking is implemented for such I/O operations. It is your responsibility to ensure that the dimensions of the scalar-field correspond to the size of the data in the geometry file. As a next step, the bounce-back nodes ar instantiated using one of the versions of the function `defineDynamics`:
+Note that currently, no error-checking is implemented for such I/O operations. It is your responsibility to ensure that the dimensions of the scalar-field correspond to the size of the data in the geometry file. As a next step, the bounce-back nodes are instantiated using one of the versions of the function `defineDynamics`:
 
 ```C++
 defineDynamics(lattice, boolMask, new BounceBack<T,DESCRIPTOR>, true);
