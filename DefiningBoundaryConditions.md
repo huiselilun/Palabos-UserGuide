@@ -220,7 +220,7 @@ Note that currently, no error-checking is implemented for such I/O operations. I
 defineDynamics(lattice, boolMask, new BounceBack<T,DESCRIPTOR>, true);
 ```
 
-This function is currently only defined for multi-blocks using the same data type (T in this case), which explains why the scalar-field boolMask is of type T and not bool, as one could have expected. The scalar-field is not bool, as one could have expected, but the real type T. This is a
+This function is currently only defined for multi-blocks using the same data type (T in this case), which explains why the scalar-field boolMask is of type T and not bool, as one could have expected. The scalar-field is not bool, as one could have expected, but the real type T.
 
 ## Bounce-back domain from an STL file
 It is not always convenient, or even possible by any realistic means, to define the shape of the computational domain analytically. In the general case, a surface mesh describing the computational domain must be provided to Palabos. If you decide to describe the domain boundary through BounceBack nodes, as described in the previous chapters, Palabos will then do nothing else than *voxelize* the domain, i.e. convert the surface description of the domain into a volume description, deciding which fluid node (or voxel) is inside the domain. This voxelization is done internally in Palabos, and is fully parallel: this is a step which usually takes a negligible time compared to the overall simulation time.
