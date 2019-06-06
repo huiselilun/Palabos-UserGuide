@@ -34,7 +34,7 @@
     - Free-Surface Flow
     - Large eddy simulations
     - Non-Newtonian fluids
-* [Setting up a problem](SettingUp.md/SettingUp)
+* [Setting up a problem](SettingUp.md/#SettingUp)
     - Attributing dynamics objects
     - Initial values of density and velocity
 * [Defining boundary conditions](DefiningBoundaryConditions.md/#DefiningBoundaryConditions)
