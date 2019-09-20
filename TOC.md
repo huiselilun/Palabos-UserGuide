@@ -1,3 +1,4 @@
+# Table of Content
 * [Introduction](Introduction.md/#Introduction)
     - What is Palabos?
     - Functionality covered by Palabos
@@ -84,3 +85,4 @@
     - Copyright of the Palabos user guide
     - Copyright and open-source license for Palabos
     - GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007
+
