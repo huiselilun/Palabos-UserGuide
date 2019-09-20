@@ -48,7 +48,7 @@
     - Time cycles of a Palabos program
     - At which point do you evaluate data?
     - Other important things to do
-* [Input/Output](Input-Output.md/#InputOutput)
+* [Input/Output](InputOutput.md/#InputOutput)
     - Output streams: writing to the terminal and into files
     - Input streams: reading large data sets from files
     - Accessing command-line parameters
