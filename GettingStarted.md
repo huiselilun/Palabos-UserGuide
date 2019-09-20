@@ -30,7 +30,7 @@ Open the project file `$(PALABOS)/codeblocks/Palabos.cbp` under code::blocks, bu
 
 Code::Blocks is a cross-compiler environment, and you can in principle use it with just any C++ compiler. In particular, you can use it with the free GCC compiler. This compiler does not even need to be installed separately under Windows if you download the version of Code::Blocks which is directly packaged with the GCC port MinGW.
 
-Note that the Palabos code does not compile with Visual C++, and we don’t know why; any suggestion is appreciated. In the meantime, you should use another compiler, such as GCC, the Intel compiler, or the Portland Group compiler.
+Note that the Palabos code does not compile with Visual C++, and we donâ€™t know why; any suggestion is appreciated. In the meantime, you should use another compiler, such as GCC, the Intel compiler, or the Portland Group compiler.
 
 As mentioned above, the Palabos download provides a project file for the free IDE Code::Blocks, through which you can easily use any of these compilers (we have only tested GCC/MinGW, though). If you have no C++ compiler installed on your system (other than Visual C++), remember to download the version of Code::Blocks which is packaged with the GCC port MinGW, after which you can directly compile Palabos.
 
@@ -48,7 +48,7 @@ to something like
 global::directories().setOutputDir(".\\tmp\\");
 ```
 
-although the programs appear to behave reasonably well even when you don’t do this.
+although the programs appear to behave reasonably well even when you donâ€™t do this.
 
 ## Compilation on a BlueGene/P
 On the BlueGene/P, the compilation procedure is the same as on any Unix-like system. Just remember to define the preprocessor macro `PLB_BGP` (set the corresponding line in the Makefile to `compileFlags= -DPLB_BGP`). Also, note that on the BlueGene, the GCC compiler produces code that is almost as fast as (and sometimes even than) the dedicated XL compiler. Furthermore, GCC compiles much faster.
@@ -56,7 +56,7 @@ On the BlueGene/P, the compilation procedure is the same as on any Unix-like sys
 It must also be pointed out the BlueGene/P uses a Big-Endian representation of numerical values, as opposed to x86 architectures that use Little-Endian. You can therefore not export binary checkpoint files from the BlueGene to an x86 computer. BlueGene-generated VTK files on the other hand can be read on an Intel PC: just replace the string `LittleEndian` to `BigEndian` in your VTK file. You can for example to this with `sed`: `sed -i "s/LittleEndian/BigEndian/g" myOutputFile.vti`. As for the input STL meshes, it is simplest to provide them in an ASCII STL format, which is platform independent. If your mesh happens to be binary STL, you can convert it to ASCII using the program `toAsciiSTL` in the directory `utility/stl`.
 
 ## Open-source libraries which are bundled with Palabos
-Palabos makes use of a few other open-source libraries. They doen’t need to be explicitly intalled, though, because they are part of the Palabos releases:
+Palabos makes use of a few other open-source libraries. They doenâ€™t need to be explicitly intalled, though, because they are part of the Palabos releases:
 
 [SConstruct](https://www.scons.org/) (Only tested with Linux):
 

@@ -44,7 +44,7 @@ if (ifile.is_open()) {
 
 An important point to remember is that the scalar-field into which the data is streamed must be first constructed manually with the right dimensions, in order to avoid memory corruption.
 
-This approach works however only if the data is streamed into a Palabos object. If you wish to stream data from a file into plain C++ data types, for example when accessing user-defined parameters, you may not use the `plb_ifstream` data type as illustrated above, because it leads to an unexpected behavior in parallel programs. In this case, there exist two possible workarounds. The first, which is the recommended approach, is to require that the user creates parameter files in an XML format, which then are parsed using Palabos’ automatic XML parsing facilities, as explained below in sections `input-from-xml`. Doing so has many advantages, as it leads to short, well readable code, with automatic type conversion of the user input, and automatic error handling in case of erroneous input data. Furthermore, parameter files in XML format are well structured and to a large extent self-documenting.
+This approach works however only if the data is streamed into a Palabos object. If you wish to stream data from a file into plain C++ data types, for example when accessing user-defined parameters, you may not use the `plb_ifstream` data type as illustrated above, because it leads to an unexpected behavior in parallel programs. In this case, there exist two possible workarounds. The first, which is the recommended approach, is to require that the user creates parameter files in an XML format, which then are parsed using Palabosâ€™ automatic XML parsing facilities, as explained below in sections `input-from-xml`. Doing so has many advantages, as it leads to short, well readable code, with automatic type conversion of the user input, and automatic error handling in case of erroneous input data. Furthermore, parameter files in XML format are well structured and to a large extent self-documenting.
 
 If for some reason you are unwilling to use XML files for user input, you can still use plain `plb_ifstream` files, but you need to manually broadcast the data to all processors in order to get a working parallel program which is compatible with the data-parallel programming concept of Palabos. To illustrate this, let us consider a situation in which the dimensions `nx` and `ny` of the matrix are written at the beginning of the file `energy.dat` and are read into the program in order to construct the scalar-field automatically with the right dimensions:
 
@@ -129,7 +129,7 @@ Palabos can read any well formed XML document, with three restrictions:
 > * Attributes are not recognized (but a tag is still properly parsed, even if attributes are present). For example, the value of the attribute `id` in the following XML tab cannot be accessed in Palabos: `<someTag id="5">`.
 > * A given tag name can be used only once. If it is used multiple times, only the last occurrence will be accessed in Palabos.
 
-These restrictions are made to simplify the syntax of the XML parser in Palabos, and because they don’t restrict the generality of the input format. The following is a typical input file which could be used with Palabos:
+These restrictions are made to simplify the syntax of the XML parser in Palabos, and because they donâ€™t restrict the generality of the input format. The following is a typical input file which could be used with Palabos:
 
 XML file `myInput.xml`:
 
@@ -164,7 +164,7 @@ XML file `myInput.xml`:
 </Inlet>
 ```
 
-And here’s how they would be parsed in a Palabos program:
+And hereâ€™s how they would be parsed in a Palabos program:
 
 ```C++
 try {
@@ -247,7 +247,7 @@ ImageWriter<T>("earth").writeScaledGif(*computeVelocity(lattice, slice));
 
 All data from a block-lattice, a scalar-field, or a tensor-field can be written into a file in a `VTK` data format. From there, it can be further post-processed by a scientific data visualization tool such as `Paraview`.
 
-The VTK format used in Palabos is based on a lossless binary representation of the data by means of the Base64 format (it’s an ASCII-based binary format, the same which is probably used by your e-mail program to encode images in the e-mail). It is often an overkill to use a format which preserves the full numerical accuracy of your simulated data, because post-processing operations often require less numerical precision than CFD simulations. The least you can do to save some memory is to convert the data from double-precision do single-precision arithmetics, as shown in the following 3D example:
+The VTK format used in Palabos is based on a lossless binary representation of the data by means of the Base64 format (itâ€™s an ASCII-based binary format, the same which is probably used by your e-mail program to encode images in the e-mail). It is often an overkill to use a format which preserves the full numerical accuracy of your simulated data, because post-processing operations often require less numerical precision than CFD simulations. The least you can do to save some memory is to convert the data from double-precision do single-precision arithmetics, as shown in the following 3D example:
 
 ```C++
 // Evaluate the discretization parameters, in order to write the data
