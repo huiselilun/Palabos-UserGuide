@@ -48,46 +48,46 @@ If the functionality that you want is present in the second place, you can modif
 #### file
 
 ```
-│── examples
-│   ├── Cavity2d
-│   ├── Cavity3d
-│   ├── Cylinder2d
-│   ├── Cylinder3d
-│   └── Porous
-└── src
-    ├── compilePalabos
-    ├── jlabos
-    │   └── plb
-    │       └── jlabos
-    ├── lib
-    ├── plbWrapper
-    │   ├── block
-    │   │   ├── double
-    │   │   ├── float
-    │   │   └── int
-    │   ├── lattice
-    │   │   ├── d2q9_double
-    │   │   ├── d2q9_float
-    │   │   ├── d3q19_double
-    │   │   └── d3q19_float
-    │   └── utils
-    ├── precompiled
-    │   ├── floatOnly
-    │   │   ├── double
-    │   │   └── float
-    │   ├── intOrFloat
-    │   │   ├── double
-    │   │   ├── float
-    │   │   └── int
-    │   └── lattice
-    │       ├── d2q9_double
-    │       ├── d2q9_float
-    │       ├── d3q19_double
-    │       └── d3q19_float
-    ├── swig
-    │   ├── pre_processed
-    ├── testing
-    └── util
+|---examples
+|   |--- Cavity2d
+|   |--- Cavity3d
+|   |--- Cylinder2d
+|   |--- Cylinder3d
+|   |--- Porous
+|--- src
+    |--- compilePalabos
+    |--- jlabos
+    |   |--- plb
+    |       |--- jlabos
+    |--- lib
+    |--- plbWrapper
+    |   |--- block
+    |   |   |--- double
+    |   |   |--- float
+    |   |   |--- int
+    |   |--- lattice
+    |   |   |--- d2q9_double
+    |   |   |--- d2q9_float
+    |   |   |--- d3q19_double
+    |   |   |--- d3q19_float
+    |   |--- utils
+    |--- precompiled
+    |   |--- floatOnly
+    |   |   |--- double
+    |   |   |--- float
+    |   |--- intOrFloat
+    |   |   |--- double
+    |   |   |--- float
+    |   |   |--- int
+    |   |--- lattice
+    |       |--- d2q9_double
+    |       |--- d2q9_float
+    |       |--- d3q19_double
+    |       |--- d3q19_float
+    |--- swig
+    |   |--- pre_processed
+    |--- testing
+    |--- util
 ```
 
 #### Technical details
